@@ -84,7 +84,7 @@ dmypy.json
 
 # Env files
 .env
-.env.*
+!.env.sample
 
 # Virtualenv
 venv/
