@@ -11,13 +11,13 @@
 <div class="container mt-5">
     <h2 class="mb-4">Заявка на ремонт техніки</h2>
 
-    <div id="form-area" hx-target="this" hx-swap="outerHTML">
-        <form method="post" class="card p-4 shadow">
-            {% csrf_token %}
-            {{ form.as_p }}
-            <button type="submit" class="btn btn-primary">Надіслати</button>
-        </form>
-    </div>
+    <div id="message-area"></div>
+
+    <form method="post" hx-target="#message-area" hx-swap="innerHTML" hx-post="." class="card p-4 shadow">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit" class="btn btn-primary">Надіслати</button>
+    </form>
 </div>
 </body>
 </html>
