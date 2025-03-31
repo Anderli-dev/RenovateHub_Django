@@ -3,6 +3,7 @@ from django.shortcuts import get_object_or_404
 from django.views import View
 from django.views.generic import ListView
 from django.views.generic.edit import FormView
+from django.contrib.auth.mixins import LoginRequiredMixin
 
 from repairs.forms import RepairRequestForm
 
@@ -25,7 +26,8 @@ class HomeView(FormView):
             return HttpResponse('<div class="alert alert-danger">Форма містить помилки.</div>')
         return super().form_invalid(form)
 
-class RepairRequestListView(ListView):
+
+class RepairRequestListView(LoginRequiredMixin, ListView):
     model = RepairRequest
     template_name = 'request_list.html'
     context_object_name = 'requests'
