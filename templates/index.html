@@ -1,12 +1,21 @@
 {% extends 'base.html' %}
 
+{% load static %}
+
 {% block title %}
 Заявка на ремонт
 {% endblock %}
 
 {% block content %}
-    <div class="container mt-5">
-        <h2 class="mb-4">Заявка на ремонт техніки</h2>
+    <div class="container pt-5">
+        <div class="container text-center">
+            <h1 class="pb-4">Ласкаво просимо до сервісу ремонту техніки!</h1>
+            <p class="pb-4">Подайте заявку на ремонт або увійдіть як адміністратор для перегляду списку.</p>
+        </div>
+
+        <img src="{% static 'images/eRepair.png' %}" class="img-fluid rounded mx-auto d-block shadow w-50" alt="єРемонт">
+
+        <h2 class="pb-4">Заявка на ремонт техніки</h2>
 
         <div id="message-area"></div>
 
