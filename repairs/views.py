@@ -11,7 +11,7 @@ from repairs.models import RepairRequest
 
 
 class HomeView(FormView):
-    template_name = 'home.html'
+    template_name = 'index.html'
     form_class = RepairRequestForm
     success_url = '/'
 
@@ -27,9 +27,9 @@ class HomeView(FormView):
         return super().form_invalid(form)
 
 
-class RepairRequestListView(LoginRequiredMixin, ListView):
+class AdminHomeView(LoginRequiredMixin, ListView):
     model = RepairRequest
-    template_name = 'request_list.html'
+    template_name = 'admin/home.html'
     context_object_name = 'requests'
     ordering = ['-created_at']
 

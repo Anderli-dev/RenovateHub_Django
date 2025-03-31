@@ -1,0 +1,62 @@
+{% extends 'admin/admin_base.html' %}
+
+{% block title %}
+Заявка на ремонт
+{% endblock %}
+
+{% block content %}
+    <form style="display:none;">
+        {% csrf_token %}
+    </form>
+
+    <div class="container mt-5">
+        <h2 class="mb-4">Список заявок</h2>
+
+        <table class="table table-bordered table-hover bg-white">
+            <thead class="table-secondary">
+                <tr>
+                    <th>Ім’я</th>
+                    <th>Телефон</th>
+                    <th>Тип</th>
+                    <th>Опис</th>
+                    <th>Дата</th>
+                    <th>Статус</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for request in requests %}
+                <tr>
+                    <td>{{ request.name }}</td>
+                    <td>{{ request.phone }}</td>
+                    <td>{{ request.get_device_type_display }}</td>
+                    <td>{{ request.description }}</td>
+                    <td>{{ request.created_at|date:"d.m.Y H:i" }}</td>
+                    <td id="status-{{ request.id }}">
+                        {% if request.is_processed %}
+                            <span class="badge bg-success">Опрацьовано</span>
+                        {% else %}
+                            <button class="btn btn-sm btn-outline-primary"
+                                    hx-post="{% url 'mark_processed' request.id %}"
+                                    hx-target="#status-{{ request.id }}"
+                                    hx-swap="outerHTML">
+                                Позначити
+                            </button>
+                        {% endif %}
+                    </td>
+                </tr>
+                {% empty %}
+                <tr><td colspan="6" class="text-center">Немає заявок</td></tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+{% endblock %}
+
+{% block scripts %}
+    <script>
+        document.body.addEventListener('htmx:configRequest', function (event) {
+            const csrfToken = document.querySelector('[name=csrfmiddlewaretoken]').value;
+            event.detail.headers['X-CSRFToken'] = csrfToken;
+        });
+    </script>
+{% endblock %}

@@ -1,8 +1,8 @@
 from django.urls import path
-from repairs.views import HomeView, RepairRequestListView, MarkProcessedView
+from repairs.views import HomeView, AdminHomeView, MarkProcessedView
 
 urlpatterns = [
     path('', HomeView.as_view(), name='home'),
-    path('requests/', RepairRequestListView.as_view(), name='request_list'),
+    path('admin-panel/', AdminHomeView.as_view(), name='admin_home'),
     path('requests/<int:pk>/processed/', MarkProcessedView.as_view(), name='mark_processed'),
 ]
