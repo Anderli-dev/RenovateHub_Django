@@ -91,3 +91,5 @@ venv/
 ENV/
 env/
 .venv/
+
+TODO.txt
